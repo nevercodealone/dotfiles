@@ -1,0 +1,9 @@
+[core]
+	excludesfile = /home/rolandgolla/.gitignore_global
+        autocrlf = input
+	editor = nvim
+[user]
+        email = rolandgolla@gmail.com
+        name = Roland Golla
+[push]
+        default = current
