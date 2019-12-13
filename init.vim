@@ -7,10 +7,7 @@
 " plugins
 call plug#begin('~/.local/share/nvim/plugged')
     " completion
-    Plug 'ncm2/ncm2'
-    Plug 'roxma/nvim-yarp'
     Plug 'phpactor/ncm2-phpactor'
-    Plug 'ncm2/ncm2-ultisnips'
     " completion for quotes, parans, brackets, etc.
     Plug 'mhartington/oceanic-next'
     " comment stuff out
@@ -57,8 +54,6 @@ let g:lmap.f = { 'name' : 'File Menu' }
 let g:lmap.o = { 'name' : 'Open Stuff' }
 
 " autocomplete
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
 
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
