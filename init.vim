@@ -49,7 +49,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'hecal3/vim-leader-guide'
 call plug#end()
 
-" Leader key 
+" Leader key
 let mapleader=","
 let g:lmap =  {}
 
@@ -132,10 +132,6 @@ set clipboard=unnamed
 
 " airline theme
 let g:airline_theme='oceanicnext'
-
-" debugging
-let $NVIM_PYTHON_LOG_FILE="/tmp/nvim_log"
-let $NVIM_PYTHON_LOG_LEVEL="DEBUG"
 
 " NERDtree
 " map ctrl+n to nerdtree
