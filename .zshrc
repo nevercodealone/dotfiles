@@ -3,7 +3,7 @@
 
 # Path to your oh-my-zsh installation.
   export ZSH="/home/rolandgolla/.oh-my-zsh"
-  export PATH=$PATH:/home/rolandgolla/.local/share/sonar-scanner/bin:/home/rolandgolla/develoment/Jetbrains/bin
+  export PATH=$PATH:/home/rolandgolla/.local/share/sonar-scanner/bin:/home/rolandgolla/develoment/Jetbrains/bin:~/.config/composer/vendor/bin
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
