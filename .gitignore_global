@@ -1,8 +1,6 @@
 .env
 .ddev
 *.iml
-vendor
-node_modules
 
 ## CYPRESS IO
 cypress/screenshots/*
