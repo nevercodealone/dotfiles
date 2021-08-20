@@ -14,3 +14,5 @@
     syntax-theme = Monokai Extended
 [interactive]
     diffFilter = delta --color-only        
+[init]
+	defaultBranch = main
