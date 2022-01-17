@@ -107,3 +107,9 @@ if [ -f '/home/rolandgolla/google-cloud-sdk/path.zsh.inc' ]; then . '/home/rolan
 if [ -f '/home/rolandgolla/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/rolandgolla/google-cloud-sdk/completion.zsh.inc'; fi
 
 precmd() { print "" }
+
+autoload zmv
+alias zmv='noglob zmv'
+alias zcp='noglob zmv -C'
+alias zln='noglob zmv -L'
+alias zsy='noglob zmv -Ls'
