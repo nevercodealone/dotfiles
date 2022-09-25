@@ -4,15 +4,26 @@
     editor = nvim
     pager = delta
 [user]
-        email = rolandgolla@gmail.com
+	email = rolandgolla@gmail.com
 	name = Roland
+	signingKey = ""
 [push]
         default = current
 [delta]
-    plus-style = "syntax #012800"
-    minus-style = "syntax #340001"
-    syntax-theme = Monokai Extended
+    navigate = true  # use n and N to move between diff sections
+    light = false 
 [interactive]
     diffFilter = delta --color-only        
 [init]
 	defaultBranch = main
+[gpg]
+	program = gpg
+[commit]
+	gpgSign = false
+[tag]
+	forceSignAnnotated = false
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default   
