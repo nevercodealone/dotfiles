@@ -6,21 +6,30 @@ call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 	Plug 'preservim/nerdtree'
 	Plug 'pangloss/vim-javascript'
 	Plug 'leafgarland/typescript-vim'
-	Plug 'neoclide/coc.nvim'
-    Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
+    Plug 'ghifarit53/tokyonight-vim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'airblade/vim-gitgutter'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 set tabstop=4
 set shiftwidth=4
 set expandtab
+set spell
+set spelllang=en_us,de_de
 
-let g:nord_italic = 1
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 syntax on
-colorscheme nord
+set termguicolors
+
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+
+colorscheme tokyonight
 " show line numbers
 set number
 set rnu
