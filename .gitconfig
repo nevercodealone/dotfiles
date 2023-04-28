@@ -1,7 +1,7 @@
 [core]
 	excludesfile = /home/rolandgolla/.gitignore_global
         autocrlf = input
-    editor = nvim
+	editor = vim
     pager = delta
 [user]
 	email = rolandgolla@gmail.com
