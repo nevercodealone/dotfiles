@@ -6,7 +6,7 @@ call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 	Plug 'preservim/nerdtree'
 	Plug 'pangloss/vim-javascript'
 	Plug 'leafgarland/typescript-vim'
-    Plug 'ghifarit53/tokyonight-vim'
+    Plug 'lifepillar/vim-solarized8'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
@@ -27,10 +27,8 @@ let mapleader = ","
 syntax on
 set termguicolors
 
-let g:tokyonight_style = 'night' " available: night, storm
-let g:tokyonight_enable_italic = 1
-
-colorscheme tokyonight
+set background=dark
+colorscheme solarized8
 " show line numbers
 set number
 set rnu
@@ -38,6 +36,11 @@ set mouse=a
 
 let NERDTreeShowHidden=1
 let g:coc_global_extensions = ['coc-tsserver' ]
+
+nnoremap ff :Files<CR>
+
+nnoremap <leader>f za
+nnoremap <leader>F zA
 
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
