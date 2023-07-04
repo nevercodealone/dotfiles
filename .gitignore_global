@@ -55,4 +55,8 @@ crashlytics-build.properties
 tags
 personal_yml.yaml
 
-.ddev
+# Docker compose
+docker-compose.override.yml
+
+# OSX
+.DS_Store
