@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/rolandgolla/.oh-my-zsh"
+  export ZSH="$HOME/.oh-my-zsh"
   export PATH="$PATH:$HOME/.local/share/sonar-scanner/bin:$HOME/.config/composer/vendor/bin:/home/rolandgolla/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/opt:$PATH"
   
 # Set name of the theme to load --- if set to "random", it will
@@ -85,12 +85,6 @@ ox () {
 # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
 # git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/rolandgolla/google-cloud-sdk/path.zsh.inc' ]; then . '/home/rolandgolla/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/rolandgolla/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/rolandgolla/google-cloud-sdk/completion.zsh.inc'; fi
 
 precmd() { print "" }
 
