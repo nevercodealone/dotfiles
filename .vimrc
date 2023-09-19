@@ -10,6 +10,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'phpactor/phpactor', {'for': 'php', 'do': ':PhpactorInstall'}
 
 " End of plugin declaration
 call plug#end()
@@ -37,6 +38,9 @@ set nowritebackup
 set updatetime=300
 set signcolumn=yes
 
+" Leader
+let mapleader = ","
+
 " Cursor shape settings
 let &t_SI = "\e[5 q"  " Cursor shape in Insert mode
 let &t_SR = "\e[4 q"  " Cursor shape in Replace mode
@@ -52,6 +56,13 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " Use <CR> to confirm completion, `<C-g>u` means break undo chain at current position.
 inoremap <expr> <CR> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
+" Fuzzy finder
+nnoremap ff :Files<CR>
+nnoremap <leader>w :w!<CR>
+
+
+nnoremap <C-t> :NERDTreeToggle<CR>
+
 " coc.nvim key mappings
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -59,9 +70,9 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
 nnoremap <silent> K :call ShowDocumentation()<CR>
 autocmd CursorHold * silent call CocActionAsync('highlight')
-nmap <leader>rn <Plug>(coc-rename)
 
 " Other coc.nvim settings and mappings (omitted for brevity)
 
