@@ -49,6 +49,9 @@ let &t_EI = "\e[2 q"  " Cursor shape in Normal mode
 " Toggle cursor line on entering and leaving insert mode
 autocmd InsertEnter,InsertLeave * set cul!
 
+" Save
+nnoremap <C-s> :w<CR>
+
 " Use tab for trigger completion with characters ahead and navigate
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
