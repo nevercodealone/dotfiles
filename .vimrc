@@ -19,8 +19,6 @@ call plug#end()
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set spell
-set spelllang=en_us,de_de
 syntax on
 set termguicolors
 set background=dark
@@ -28,6 +26,12 @@ colorscheme solarized8
 set number
 set rnu
 set mouse=a
+
+set encoding=utf-8
+set spell
+set spelllang=en
+set autoindent
+set smartindent
 
 " NERDTree settings (omitted for brevity)
 
