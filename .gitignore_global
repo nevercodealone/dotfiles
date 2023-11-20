@@ -1,5 +1,5 @@
 .env
-.ddev
+.ddev/
 *.iml
 
 ## CYPRESS IO
