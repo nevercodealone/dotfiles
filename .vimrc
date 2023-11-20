@@ -26,6 +26,8 @@ colorscheme solarized8
 set number
 set rnu
 set mouse=a
+" use +y on Mac
+set clipboard=unnamed
 
 set encoding=utf-8
 set spell
