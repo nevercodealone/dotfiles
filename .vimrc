@@ -33,6 +33,7 @@ colorscheme solarized8
 set number
 set rnu
 set mouse=a
+set clipboard=unnamed
 
 let NERDTreeShowHidden=1
 let g:coc_global_extensions = ['coc-tsserver' ]
