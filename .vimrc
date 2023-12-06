@@ -36,6 +36,7 @@ set autoindent
 set smartindent
 
 " NERDTree settings (omitted for brevity)
+let NERDTreeShowHidden=1
 
 " coc.nvim settings
 set encoding=utf-8
