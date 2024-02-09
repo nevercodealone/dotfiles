@@ -10,7 +10,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'phpactor/phpactor', {'for': 'php', 'do': ':PhpactorInstall'}
 
 " End of plugin declaration
 call plug#end()
@@ -39,7 +38,6 @@ set smartindent
 let NERDTreeShowHidden=1
 
 " coc.nvim settings
-set encoding=utf-8
 set nobackup
 set nowritebackup
 set updatetime=300
