@@ -5,7 +5,8 @@
   export ZSH="$HOME/.oh-my-zsh"
   # ... (der restliche Inhalt deiner .zshrc)
 
-export PATH="$PATH:$HOME/.local/share/sonar-scanner/bin:$HOME/.config/composer/vendor/bin:/home/rolandgolla/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/opt:/home/rolandgolla/anaconda3/bin"
+export PATH="$PATH:$HOME/.local/share/sonar-scanner/bin:$HOME/.config/composer/vendor/bin:/home/rolandgolla/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/opt:/home/rolandgolla/anaconda3/bin:$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
   
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
