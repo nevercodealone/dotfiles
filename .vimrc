@@ -1,3 +1,10 @@
+" To install vim-plug, run the following command:
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+" After adding coc.nvim, run the following command in Vim to install extensions:
+" :CocInstall coc-json coc-tsserver coc-html coc-css
+
 " Initialize plugin manager
 call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
