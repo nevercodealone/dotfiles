@@ -1,5 +1,6 @@
 # AI tools
 CLAUDE.md
+.claude_config/
 
 .env
 .ddev/
