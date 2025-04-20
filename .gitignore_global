@@ -5,7 +5,7 @@ CLAUDE.md
 .env
 .ddev/
 *.iml
-
+flowbite-pro-templates/
 ## Directory-based project format:
 .vscode/
 .idea/
