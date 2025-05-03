@@ -3,6 +3,7 @@ CLAUDE.md
 claude.md
 Claude.md
 .claude_config/
+**/.claude/settings.local.json
 
 .env
 .ddev/
