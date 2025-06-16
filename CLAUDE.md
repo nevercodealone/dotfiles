@@ -25,3 +25,9 @@
 - Use clean, semantic selector names (data-cy, data-test, or data-testid attributes)
 - Keep selectors in page objects, not in test files
 - Prefer data attributes over CSS classes or IDs for test selectors
+- Prefer fuzzy selectors with contains() for text-based elements
+
+## Tailwind CSS & Flowbite Preferences
+- Use ~/development/flowbite/flowbite-pro-templates as preferred source for Tailwind CSS and Flowbite best practice examples
+- Reference existing components and patterns from Flowbite Pro Templates when implementing UI elements
+- Follow Flowbite component structure and naming conventions
