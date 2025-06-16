@@ -1,0 +1,2 @@
+# Override global gitignore for CLAUDE.md
+!CLAUDE.md
