@@ -20,6 +20,21 @@
 - Use meaningful variable and function names
 - Avoid code duplication - always search for existing methods in classes and utils, check what you can use or where to add new methods for new functions
 
+## Testing Strategy (Unit/Integration Tests)
+- **Avoid test duplication**: Create comprehensive mock tests that cover ALL functionality and edge cases
+- **Mock tests first**: Write extensive mock tests (15-30+ cases) covering every scenario, edge case, and error condition
+- **Single real test**: Add only ONE real/integration test to verify end-to-end connectivity and basic functionality
+- **Real test timeout**: Keep real test timeouts realistic (10-15 seconds max, not 60 seconds)
+- **Mock test benefits**: Fast execution (~50ms), no external dependencies, reliable for CI/CD
+- **Real test purpose**: Validates database/API connectivity, confirms integration works with live data
+- **Coverage approach**: Mock tests = 95% coverage, Real test = 5% smoke test
+
+### Example Test Structure
+```
+/tests/api/mock/feature.test.ts   # 20+ comprehensive test cases
+/tests/api/real/feature.test.ts   # 1 integration test
+```
+
 ## Cypress Testing Preferences
 - Always use Page Object pattern for test organization
 - Use clean, semantic selector names (data-cy, data-test, or data-testid attributes)
