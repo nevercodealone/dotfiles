@@ -1,0 +1,10 @@
+#!/bin/sh
+# Display configuration for Lenovo monitor
+# This file is executed on graphical login
+
+# Check if external monitor (DP-1) is connected
+if xrandr | grep "DP-1 connected"; then
+    # Dual monitor setup: Lenovo external (2560x1440) left, laptop (1920x1080) right
+    xrandr --output eDP-1 --mode 1920x1080 --pos 2560x0 \
+           --output DP-1 --mode 2560x1440 --pos 0x0 --primary
+fi
