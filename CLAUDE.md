@@ -4,8 +4,15 @@
 - No co-author attribution in commits
 - No Claude Code generation messages in commits
 - Keep commit messages clean and professional
+- Use less commits but to understand the logical part of the steps 
 - Follow conventional commit format when appropriate
 - Use descriptive commit messages that explain the "why" not just the "what"
+
+## Git Commit Guidelines
+- NEVER add co-author hints to git commits
+- NEVER add "Generated with Claude Code" footer
+- Keep commit messages professional and focused on the changes made
+
 
 ## Code Style Preferences  
 - Use semantic HTML markup
