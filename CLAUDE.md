@@ -53,3 +53,20 @@
 - Use ~/development/flowbite/flowbite-pro-templates as preferred source for Tailwind CSS and Flowbite best practice examples
 - Reference existing components and patterns from Flowbite Pro Templates when implementing UI elements
 - Follow Flowbite component structure and naming conventions
+
+## Project-Specific Rulesets
+
+### Automatic Project Detection and Ruleset Loading
+Before starting any work, automatically detect the project type and load appropriate rulesets:
+
+#### Implementation
+1. **Scan Available Rulesets**: Check `/home/rolandgolla/development/nca/claude-md-rulesets/rulesets/` for all available project rulesets
+2. **Dynamic Project Detection**: For each available ruleset, check if the current project matches that technology
+3. **Load Matching Rulesets**: If project indicators are found, automatically load the corresponding `CLAUDE.md` ruleset file
+4. **Rule Precedence**: Project-specific rules take precedence over global rules when conflicts exist
+
+#### Detection Process
+- Automatically discover all available rulesets in the rulesets directory
+- For each ruleset, check common project indicators (config files, dependencies, directory structures)
+- Load the matching ruleset without hardcoding specific technologies
+- Apply loaded rules as mandatory overrides to these global rules
