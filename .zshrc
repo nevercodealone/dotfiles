@@ -121,3 +121,4 @@ export NVM_DIR="$HOME/.nvm"
 
 nvm use 21
 eval "$(ssh-agent -s)"
+export PATH="$HOME/bin:$PATH"

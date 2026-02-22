@@ -6,6 +6,7 @@ task.md
 TASK.md
 .claude_config/
 **/.claude/settings.local.json
+.playwright-mcp/
 
 .env
 .ddev/
