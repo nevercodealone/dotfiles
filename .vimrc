@@ -44,6 +44,9 @@ set smartindent
 let NERDTreeShowHidden=1
 
 " coc.nvim settings
+" Format on save with Prettier (uses project config)
+autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.css,*.scss,*.json,*.html,*.md,*.yaml,*.yml silent! call CocAction('runCommand', 'prettier.formatFile')
+
 set nobackup
 set nowritebackup
 set updatetime=300
