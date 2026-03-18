@@ -40,6 +40,13 @@ set spelllang=en
 set autoindent
 set smartindent
 
+" Auto-reload files changed externally (AI tools, etc.)
+set autoread
+augroup auto_checktime
+  autocmd!
+  autocmd FocusGained,BufEnter * checktime
+augroup END
+
 " NERDTree settings (omitted for brevity)
 let NERDTreeShowHidden=1
 
