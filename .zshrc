@@ -122,3 +122,6 @@ export NVM_DIR="$HOME/.nvm"
 nvm use 22
 eval "$(ssh-agent -s)"
 export PATH="$HOME/bin:$PATH"
+
+# opencode
+export PATH=/home/rolandgolla/.opencode/bin:$PATH
