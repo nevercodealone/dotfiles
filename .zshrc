@@ -123,5 +123,9 @@ nvm use 22
 eval "$(ssh-agent -s)"
 export PATH="$HOME/bin:$PATH"
 
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+  tmux attach -t default || tmux new -s default
+fi
+
 # opencode
 export PATH=/home/rolandgolla/.opencode/bin:$PATH
