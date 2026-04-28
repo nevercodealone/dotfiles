@@ -124,7 +124,8 @@ eval "$(ssh-agent -s)"
 export PATH="$HOME/bin:$PATH"
 
 if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-  tmux attach -t default || tmux new -s default
+  session_name=$(basename "$PWD")
+  tmux new-session -s "$session_name" 2>/dev/null || tmux new-session -s "${session_name}_$$"
 fi
 
 # opencode
