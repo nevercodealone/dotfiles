@@ -96,9 +96,13 @@ export PATH="$HOME/bin:$PATH"
 # Auto-attach tmux per directory (skip if already inside tmux)
 if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
   session_name=$(basename "$PWD")
-  tmux new-session -A -s "$session_name" 2>/dev/null \
-    || tmux new-session -s "${session_name}_$$"
+  tmux new-session -A -s "$session_name"
 fi
 
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/roland/.lmstudio/bin"
+# End of LM Studio CLI section
+
