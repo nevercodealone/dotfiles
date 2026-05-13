@@ -1,5 +1,5 @@
 [core]
-	excludesfile = /home/rolandgolla/.gitignore_global
+	excludesfile = ~/.gitignore_global
         autocrlf = input
 	editor = vim
     pager = delta
