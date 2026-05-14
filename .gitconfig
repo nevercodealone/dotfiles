@@ -1,19 +1,18 @@
 [core]
 	excludesfile = ~/.gitignore_global
-        autocrlf = input
+	autocrlf = input
 	editor = vim
-    pager = delta
+	pager = delta
 [user]
 	email = rolandgolla@gmail.com
 	name = Roland Golla
-	signingKey = ""
 [push]
-        default = current
+	default = current
 [delta]
-    navigate = true  # use n and N to move between diff sections
-    light = false 
+	navigate = true
+	light = false
 [interactive]
-    diffFilter = delta --color-only        
+	diffFilter = delta --color-only
 [init]
 	defaultBranch = main
 [gpg]
@@ -23,7 +22,6 @@
 [tag]
 	forceSignAnnotated = false
 [merge]
-    conflictstyle = diff3
-
+	conflictstyle = diff3
 [diff]
-    colorMoved = default   
+	colorMoved = default

@@ -47,7 +47,6 @@ augroup auto_checktime
   autocmd FocusGained,BufEnter * checktime
 augroup END
 
-" NERDTree settings (omitted for brevity)
 let NERDTreeShowHidden=1
 
 " coc.nvim settings
@@ -97,8 +96,6 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
 nnoremap <silent> K :call ShowDocumentation()<CR>
 autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Other coc.nvim settings and mappings (omitted for brevity)
 
 " Function to show documentation
 function! ShowDocumentation()
