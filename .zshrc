@@ -1,13 +1,18 @@
-# Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# PATH (use $HOME everywhere for portability)
-export PATH="$PATH:$HOME/.local/share/sonar-scanner/bin:$HOME/.config/composer/vendor/bin:$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:/opt:$HOME/anaconda3/bin"
+path+=(
+  $HOME/.local/share/sonar-scanner/bin
+  $HOME/.config/composer/vendor/bin
+  $HOME/.local/bin
+  $HOME/.yarn/bin
+  $HOME/.config/yarn/global/node_modules/.bin
+  /opt
+  $HOME/anaconda3/bin
+)
+export PATH
 
-# Theme
 ZSH_THEME="fino"
 
-# Plugins (added 'ssh-agent' to manage SSH keys cleanly across shells)
 plugins=(
   git
   extract
@@ -19,7 +24,6 @@ plugins=(
   history-substring-search
   zsh-autosuggestions
   history
-  chucknorris
   jira
   docker-compose
   ssh-agent
@@ -33,23 +37,27 @@ ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=cyan"
 bindkey '^f' vi-forward-blank-word
 
-# ox helper: run keywanghadamioxid/ox in docker with host user/SSH
 ox () {
-    tty=
-    tty -s && tty=--tty
+    if ! command -v docker &>/dev/null; then
+        echo "ox: docker not found" >&2; return 1
+    fi
+    if [ -z "$SSH_AUTH_SOCK" ]; then
+        echo "ox: SSH agent not running" >&2; return 1
+    fi
+    local tty_flag=""
+    tty -s && tty_flag=--tty
     docker run \
-        $tty \
+        $tty_flag \
         --interactive \
         --rm \
-        --user $(id -u):$(id -g) \
+        --user "$(id -u):$(id -g)" \
         --volume /etc/passwd:/etc/passwd:ro \
         --volume /etc/group:/etc/group:ro \
-        --volume $HOME:$HOME \
-        --volume $(pwd):/app \
-        --volume $(pwd)/ox:/tmp \
-        --volume $SSH_AUTH_SOCK:/ssh-agent \
+        --volume "$HOME/.ssh:$HOME/.ssh:ro" \
+        --volume "$(pwd):/app" \
+        --volume "$SSH_AUTH_SOCK:/ssh-agent" \
         --env SSH_AUTH_SOCK=/ssh-agent \
-         keywanghadamioxid/ox "$@"
+        keywanghadamioxid/ox "$@"
 }
 
 ## Setup notes (one-time, per fresh machine):
@@ -68,41 +76,38 @@ alias zcp='noglob zmv -C'
 alias zln='noglob zmv -L'
 alias zsy='noglob zmv -Ls'
 
-# >>> conda initialize >>> (only if anaconda is actually installed)
-if [ -d "$HOME/anaconda3" ]; then
-  __conda_setup="$("$HOME/anaconda3/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
-  if [ $? -eq 0 ]; then
-      eval "$__conda_setup"
-  else
-      if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
-          . "$HOME/anaconda3/etc/profile.d/conda.sh"
-      else
-          export PATH="$HOME/anaconda3/bin:$PATH"
-      fi
-  fi
-  unset __conda_setup
+# >>> conda initialize >>>
+if [ -d "$HOME/anaconda3" ] && [ -x "$HOME/anaconda3/bin/conda" ]; then
+    eval "$("$HOME/anaconda3/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)" || \
+        source "$HOME/anaconda3/etc/profile.d/conda.sh" 2>/dev/null
 fi
-# <<< conda initialize <
+# <<< conda initialize <<<
 
-# nvm (single load, no duplicate)
+# nvm (lazy-loaded for fast shell startup)
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-nvm use --lts >/dev/null   # always uses whatever LTS is currently installed
+nvm() {
+    unset -f nvm node npm npx
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    nvm "$@"
+}
+node()  { nvm use --lts >/dev/null 2>&1 || nvm install --lts >/dev/null 2>&1; command node "$@"; }
+npm()   { nvm use --lts >/dev/null 2>&1 || nvm install --lts >/dev/null 2>&1; command npm "$@"; }
+npx()   { nvm use --lts >/dev/null 2>&1 || nvm install --lts >/dev/null 2>&1; command npx "$@"; }
 
 # Local bin takes precedence
 export PATH="$HOME/bin:$PATH"
 
-# Auto-attach tmux per directory (skip if already inside tmux)
-if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-  session_name=$(basename "$PWD")
-  tmux new-session -A -s "$session_name"
+# Auto-start tmux (fresh session per terminal, skip if already in tmux, VS Code, or SSH)
+if command -v tmux &>/dev/null && [ -z "$TMUX" ] && [ -z "$VSCODE_IPC_HOOK_CLI" ] && [ -z "$SSH_CONNECTION" ]; then
+  tmux new-session
 fi
 
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
 
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:/home/roland/.lmstudio/bin"
-# End of LM Studio CLI section
+export PATH="$PATH:$HOME/.lmstudio/bin"
 
