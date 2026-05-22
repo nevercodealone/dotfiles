@@ -1,32 +1,44 @@
+# ---- oh-my-zsh ----
 export ZSH="$HOME/.oh-my-zsh"
 
-path+=(
+# Doppelte PATH-Einträge automatisch entfernen
+typeset -U path PATH
+
+# Basis-PATH (zentral, nicht mehr über die ganze Datei verstreut)
+path=(
+  $HOME/bin
+  $HOME/.local/bin
+  $HOME/.opencode/bin
+  $HOME/.lmstudio/bin
   $HOME/.local/share/sonar-scanner/bin
   $HOME/.config/composer/vendor/bin
-  $HOME/.local/bin
   $HOME/.yarn/bin
   $HOME/.config/yarn/global/node_modules/.bin
-  /opt
-  $HOME/anaconda3/bin
+  $path
 )
-export PATH
+# Hinweis: /opt und $HOME/anaconda3/bin entfernt.
+#   - /opt direkt enthält keine Binaries, falsch eingehängt.
+#   - anaconda3/bin wird unten von "conda initialize" gesetzt, doppelt war Quatsch.
 
 ZSH_THEME="fino"
 
+# Plugin-Reihenfolge korrigiert:
+#   - zsh-autosuggestions vor zsh-syntax-highlighting
+#   - history-substring-search MUSS nach zsh-syntax-highlighting kommen (offizielle Doku)
 plugins=(
   git
   extract
   jump
   z
-  zsh-syntax-highlighting
   vi-mode
   web-search
-  history-substring-search
-  zsh-autosuggestions
   history
   jira
   docker-compose
   ssh-agent
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  history-substring-search
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -37,6 +49,17 @@ ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=cyan"
 bindkey '^f' vi-forward-blank-word
 
+# Leere Zeile vor jedem Prompt
+precmd() { print "" }
+
+# zmv & friends
+autoload -U zmv
+alias zmv='noglob zmv'
+alias zcp='noglob zmv -C'
+alias zln='noglob zmv -L'
+alias zsy='noglob zmv -Ls'
+
+# ---- ox: ephemerer Docker-Container mit aktuellem User ----
 ox () {
     if ! command -v docker &>/dev/null; then
         echo "ox: docker not found" >&2; return 1
@@ -59,55 +82,32 @@ ox () {
         --env SSH_AUTH_SOCK=/ssh-agent \
         keywanghadamioxid/ox "$@"
 }
-
-## Setup notes (one-time, per fresh machine):
-# sudo apt install fortune-mod gawk
-# nvm install --lts
-# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-# git clone https://github.com/zsh-users/zsh-autosuggestions.git    ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-# Blank line before each prompt
-precmd() { print "" }
-
-# zmv & friends
-autoload zmv
-alias zmv='noglob zmv'
-alias zcp='noglob zmv -C'
-alias zln='noglob zmv -L'
-alias zsy='noglob zmv -Ls'
-
-# >>> conda initialize >>>
-if [ -d "$HOME/anaconda3" ] && [ -x "$HOME/anaconda3/bin/conda" ]; then
-    eval "$("$HOME/anaconda3/bin/conda" 'shell.zsh' 'hook' 2>/dev/null)" || \
-        source "$HOME/anaconda3/etc/profile.d/conda.sh" 2>/dev/null
-fi
-# <<< conda initialize <<<
-
-# nvm (lazy-loaded for fast shell startup)
+# ---- nvm (echtes lazy loading) ----
+# Vorher war es als "lazy" beschrieben, hat nvm aber sofort am Anfang geladen.
+# Jetzt wird nvm.sh erst beim ersten Aufruf von nvm/node/npm/npx gesourct.
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-nvm() {
+
+_load_nvm() {
     unset -f nvm node npm npx
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-    nvm "$@"
+    # nvm use --lts nur EINMAL beim ersten Load, nicht bei jedem node-Aufruf
+    nvm use --lts >/dev/null 2>&1 || nvm install --lts >/dev/null 2>&1
 }
-node()  { nvm use --lts >/dev/null 2>&1 || nvm install --lts >/dev/null 2>&1; command node "$@"; }
-npm()   { nvm use --lts >/dev/null 2>&1 || nvm install --lts >/dev/null 2>&1; command npm "$@"; }
-npx()   { nvm use --lts >/dev/null 2>&1 || nvm install --lts >/dev/null 2>&1; command npx "$@"; }
 
-# Local bin takes precedence
-export PATH="$HOME/bin:$PATH"
+nvm()  { _load_nvm; nvm  "$@"; }
+node() { _load_nvm; command node "$@"; }
+npm()  { _load_nvm; command npm  "$@"; }
+npx()  { _load_nvm; command npx  "$@"; }
 
-# Auto-start tmux (fresh session per terminal, skip if already in tmux, VS Code, or SSH)
+# ---- Auto-tmux ----
+# WICHTIG: $SHELL muss auf zsh zeigen, sonst startet tmux bash-Panes ohne oh-my-zsh.
+# Falls deine Login-Shell noch bash ist:
+#   chsh -s "$(command -v zsh)"
+#   danach KOMPLETT aus- und einloggen (nicht nur Terminal-Tab schließen)
+#
+# `exec` ersetzt die äußere zsh durch tmux. Sonst hängt beim tmux-Exit eine
+# tote zsh rum, die du nochmal beenden müsstest.
 if command -v tmux &>/dev/null && [ -z "$TMUX" ] && [ -z "$VSCODE_IPC_HOOK_CLI" ] && [ -z "$SSH_CONNECTION" ]; then
-  tmux new-session
+    exec tmux new-session
 fi
-
-# opencode
-export PATH="$HOME/.opencode/bin:$PATH"
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:$HOME/.lmstudio/bin"
-
