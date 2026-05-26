@@ -111,3 +111,24 @@ npx()  { _load_nvm; command npx  "$@"; }
 if command -v tmux &>/dev/null && [ -z "$TMUX" ] && [ -z "$VSCODE_IPC_HOOK_CLI" ] && [ -z "$SSH_CONNECTION" ]; then
     exec tmux new-session
 fi
+
+# ---- nvm (optimized lazy loading) ----
+export NVM_DIR="$HOME/.nvm"
+
+# Lazy loading function
+_load_nvm() {
+    unset -f nvm node npm npx
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    # Use default version or latest LTS
+    nvm use default >/dev/null 2>&1 || nvm use --lts >/dev/null 2>&1 || nvm install --lts >/dev/null 2>&1
+}
+
+# Create aliases that will trigger nvm loading
+nvm()  { _load_nvm; nvm  "$@"; }
+node() { _load_nvm; command node "$@"; }
+npm()  { _load_nvm; command npm  "$@"; }
+npx()  { _load_nvm; command npx  "$@"; }
+
+# Set default node version to latest
+alias nvm-set-default="nvm alias default node"
