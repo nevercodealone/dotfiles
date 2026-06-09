@@ -82,24 +82,6 @@ ox () {
         --env SSH_AUTH_SOCK=/ssh-agent \
         keywanghadamioxid/ox "$@"
 }
-# ---- nvm (echtes lazy loading) ----
-# Vorher war es als "lazy" beschrieben, hat nvm aber sofort am Anfang geladen.
-# Jetzt wird nvm.sh erst beim ersten Aufruf von nvm/node/npm/npx gesourct.
-export NVM_DIR="$HOME/.nvm"
-
-_load_nvm() {
-    unset -f nvm node npm npx
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-    # nvm use --lts nur EINMAL beim ersten Load, nicht bei jedem node-Aufruf
-    nvm use --lts >/dev/null 2>&1 || nvm install --lts >/dev/null 2>&1
-}
-
-nvm()  { _load_nvm; nvm  "$@"; }
-node() { _load_nvm; command node "$@"; }
-npm()  { _load_nvm; command npm  "$@"; }
-npx()  { _load_nvm; command npx  "$@"; }
-
 # ---- Auto-tmux ----
 # WICHTIG: $SHELL muss auf zsh zeigen, sonst startet tmux bash-Panes ohne oh-my-zsh.
 # Falls deine Login-Shell noch bash ist:
