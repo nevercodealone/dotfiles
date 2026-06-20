@@ -48,11 +48,10 @@ Commands in `opencode/commands/` are symlinked to `~/.config/opencode/commands/`
 ## Notes
 
 - **xprofile**: hardwired for Lenovo laptop (eDP-1) + external monitor (DP-1). Adjust monitor names for your hardware.
-- **tmux auto-start**: each terminal gets its own fresh tmux session. Auto-disabled in VS Code terminals and SSH sessions.
+- **tmux auto-start**: each terminal gets its own fresh tmux session. Auto-disabled in VS Code terminals and SSH sessions. Sessions are destroyed when the terminal closes (`destroy-unattached on`), so closing the window kills any running dev servers — no manual cleanup needed.
 - **nvm**: lazy-loaded on first use of `node`, `npm`, `npx`, or `nvm` for fast shell startup.
 
 ### tmux session management
 
-- `Ctrl+b d` — detach from session (session keeps running)
-- `tmux ls` — list running sessions
-- `tmux attach -t N` — re-attach to session number N
+- `Ctrl+b d` — detach from session (session is destroyed and its processes killed, since `destroy-unattached on` is set)
+- `tmux ls` — list running sessions (only those with an attached client)
